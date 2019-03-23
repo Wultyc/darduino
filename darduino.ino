@@ -11,7 +11,12 @@
 #define BTN 3
 
 //delay de piscar os led
-#define LED_DELAY 200
+#define LED_DELAY 500
+#define LED_DELAY_SPLAH 200
+#define READ_DELAY 1500
+
+//flag que indica se é o primeiro ciclo
+bool first_cicle = true;
 
 //Numero que vai ser sorteado
 int numero = 0;
@@ -62,6 +67,14 @@ void setup(){
 
 void loop(){
   
+  //Se fo o primeiro ciclo liga todos os leds para indicar que se ligou o dado
+  if(first_cicle == true){
+    ch_all(1); //Liga todos
+    delay(LED_DELAY);
+    
+    first_cicle = false; //qnquanto não se fizer reset ao arduino não ha mais esta paragem
+  }
+  
   //enquanto nenhum numero for selecionado a função spalh vai continuar a ser chamada
   while(numero == 0){ 
     splash();
@@ -75,6 +88,9 @@ void loop(){
   digitalWrite(E, ledMap[numero][4]);
   digitalWrite(F, ledMap[numero][5]);
   digitalWrite(G, ledMap[numero][6]);
+  
+  delay(READ_DELAY);
+  numero = 0; //para voltar a entrar no splash
 }
 
 //Nesta função mudamos o estado de todos os leds
@@ -90,61 +106,59 @@ void ch_all(int state){
 
 //Nesta função definimos o comportamento dos leds antes de qualquer número ser sorteado
 void splash(){
-  ch_all(1); //Liga todos
-  delay(LED_DELAY);
   ch_all(0); //Desliga todos
   
   //Começa o efeito
   digitalWrite(A, HIGH);
-  delay(LED_DELAY);
+  delay(LED_DELAY_SPLAH);
   digitalWrite(A, LOW);
   
   digitalWrite(B, HIGH);
-  delay(LED_DELAY);
+  delay(LED_DELAY_SPLAH);
   digitalWrite(B, LOW);
   
   digitalWrite(C, HIGH);
-  delay(LED_DELAY);
+  delay(LED_DELAY_SPLAH);
   digitalWrite(C, LOW);
   
   digitalWrite(D, HIGH);
-  delay(LED_DELAY);
+  delay(LED_DELAY_SPLAH);
   digitalWrite(D, LOW);
   
   digitalWrite(E, HIGH);
-  delay(LED_DELAY);
+  delay(LED_DELAY_SPLAH);
   digitalWrite(E, LOW);
   
   digitalWrite(F, HIGH);
-  delay(LED_DELAY);
+  delay(LED_DELAY_SPLAH);
   digitalWrite(F, LOW);
   
   digitalWrite(G, HIGH);
-  delay(LED_DELAY);
+  delay(LED_DELAY_SPLAH);
   digitalWrite(G, LOW);
   
   digitalWrite(F, HIGH);
-  delay(LED_DELAY);
+  delay(LED_DELAY_SPLAH);
   digitalWrite(F, LOW);
   
   digitalWrite(E, HIGH);
-  delay(LED_DELAY);
+  delay(LED_DELAY_SPLAH);
   digitalWrite(E, LOW);
   
   digitalWrite(D, HIGH);
-  delay(LED_DELAY);
+  delay(LED_DELAY_SPLAH);
   digitalWrite(D, LOW);
   
   digitalWrite(C, HIGH);
-  delay(LED_DELAY);
+  delay(LED_DELAY_SPLAH);
   digitalWrite(C, LOW);
   
   digitalWrite(B, HIGH);
-  delay(LED_DELAY);
+  delay(LED_DELAY_SPLAH);
   digitalWrite(B, LOW);
   
   digitalWrite(A, HIGH);
-  delay(LED_DELAY);
+  delay(LED_DELAY_SPLAH);
   digitalWrite(A, LOW);
   
 }
@@ -157,32 +171,26 @@ void sorting_led(){
   
   //Começa o efeito
   digitalWrite(A, HIGH);
-  delay(LED_DELAY);
-  digitalWrite(A, LOW);
-  
-  digitalWrite(B, HIGH);
-  delay(LED_DELAY);
-  digitalWrite(B, LOW);
-  
-  digitalWrite(C, HIGH);
-  delay(LED_DELAY);
-  digitalWrite(C, LOW);
-  
-  digitalWrite(D, HIGH);
-  delay(LED_DELAY);
-  digitalWrite(D, LOW);
-  
-  digitalWrite(E, HIGH);
-  delay(LED_DELAY);
-  digitalWrite(E, LOW);
-  
-  digitalWrite(F, HIGH);
-  delay(LED_DELAY);
-  digitalWrite(F, LOW);
-  
   digitalWrite(G, HIGH);
   delay(LED_DELAY);
+  digitalWrite(A, LOW);
   digitalWrite(G, LOW);
+  
+  digitalWrite(B, HIGH);
+  digitalWrite(F, HIGH);
+  delay(LED_DELAY);
+  digitalWrite(B, LOW);
+  digitalWrite(F, LOW);
+  
+  digitalWrite(C, HIGH);
+  digitalWrite(E, HIGH);
+  delay(LED_DELAY);
+  digitalWrite(C, LOW);
+  digitalWrite(E, LOW);
+  
+  digitalWrite(D, HIGH);
+    
+  delay(LED_DELAY);
   
   ch_all(1); //Liga todos
   delay(LED_DELAY);
