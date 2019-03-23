@@ -13,7 +13,7 @@
 //delay de piscar os led
 #define LED_DELAY 500
 #define LED_DELAY_SPLAH 200
-#define READ_DELAY 1500
+#define READ_DELAY 2500
 
 //flag que indica se é o primeiro ciclo
 bool first_cicle = true;
@@ -189,11 +189,8 @@ void sorting_led(){
   digitalWrite(E, LOW);
   
   digitalWrite(D, HIGH);
-    
   delay(LED_DELAY);
-  
-  ch_all(1); //Liga todos
-  delay(LED_DELAY);
+
   ch_all(0); //Desliga todos
 }
 
